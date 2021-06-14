@@ -1,0 +1,166 @@
+@font-face {
+    font-family: "avenir-ultralight";
+    src: url("/static/fonts/fa19948e-5e38-4909-b31e-41acd170d6f2.woff") format("woff")
+}
+
+@font-face {
+    font-family: "avenir-light";
+    src: url("/static/fonts/b4199f62-4009-46e6-9359-5c262251c962.woff") format("woff")
+}
+
+@font-face {
+    font-family: "avenir-med";
+    src: url("/static/fonts/bb495831-ebf7-4423-9a14-ee11bf6b292f.woff") format("woff")
+}
+
+@font-face {
+    font-family: "avenir-bold";
+    src: url("/static/fonts/4fdf61bb-78c9-43e1-8477-4dd0c14fa69e.woff") format("woff")
+}
+
+@font-face {
+    font-family: "avenir-reg";
+    src: url("/static/fonts/4fdf61bb-78c9-43e1-8477-4dd0c14fa69e.woff") format("woff")
+}
+
+.bkg_on_load {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 99999;
+    cursor: pointer;
+}
+
+.bkg_on_load iframe {
+    width: 100px;
+    height: 100px;
+    /* background-color: red; */
+    /* Center vertically and horizontally */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px; /* apply negative top and left margins to truly center the element */
+}
+
+.loading {
+    display: none;
+    z-index: 100000;
+    position: absolute;
+    width: 592px;
+    /*image width */
+    height: 512px;
+    /*image height */
+    left: 50%;
+    top: 50%;
+    margin-left: -296px;
+    /*image width/2 */
+    margin-top: -256px;
+    /*image height/2 */
+}
+
+html {
+    font-family: "avenir";
+}
+
+.hidden {
+    display: none !important;
+}
+
+.card {
+    margin-top: 20px;
+    padding: 20px
+}
+
+.wd {
+    max-width: 1200px !important;
+}
+
+.cabecalho {
+    background: linear-gradient(141deg, rgba(55, 80, 92, 0.60) 0%, rgba(150, 97, 107, 0.70) 51%, rgba(17, 53, 55, 0.80) 75%), url("/static/img/bkg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: middle;
+    height: 600px;
+    padding: 300px;
+}
+
+.cabecalho h2,
+.cabecalho h4 {
+    color: #FFF;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+    font-family: "avenir-med";
+}
+
+.valor {
+    text-align: center;
+}
+
+.valor p {
+    border: 1px solid #F0F0F0;
+    font-size: 2.5em;
+    color: #ff8224;
+}
+
+.cabecalho h2 {
+    font-size: 48px;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
+}
+
+.cabecalho h4 {
+    font-family: "avenir-ultralight", Arial, Helvetica, sans-serif;
+}
+
+.card {
+    background-color: #FFF;
+}
+
+body {
+    background-color: #F4FAFF;
+}
+
+.margem-100 {
+    margin-top: 100px;
+}
+
+.padding-top{
+    padding-top: 50px;
+}
+
+.slide-top {
+    -webkit-animation: slide-top 2s linear infinite alternate both;
+    animation: slide-top 2s linear infinite alternate both
+}
+
+@-webkit-keyframes slide-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+    100% {
+        -webkit-transform: translateY(-100px);
+        transform: translateY(-100px)
+    }
+}
+
+@keyframes slide-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+    100% {
+        -webkit-transform: translateY(-100px);
+        transform: translateY(-100px)
+    }
+}

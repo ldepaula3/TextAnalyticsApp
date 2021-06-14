@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <title>LNA App</title>
+    <link href="//www.sas.com/favicon.ico" rel="shortcut icon">
+    <script type="text/javascript" src="/static/js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap_4.3.1/css/bootstrap.min.css">
+    <script src="/static/bootstrap_4.3.1/js/bootstrap.min.js"></script>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <link href="/static/css/all.css" rel="stylesheet" />
+    <script src="/static/js/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const element = document.querySelector('form');
+            element.addEventListener('submit', event => {
+                event.preventDefault();
+            });
+
+            $('#btnSend').click(function() {
+                
+                dt = {
+                    "host": $("#host").val(),
+                    "text": $("#text").val().replaceAll(/[&\/\\#,+()$~%.'":*?<>{}]/g,''),
+                    "user": $("#username").val(),
+                    "pwd": $("#password").val(),
+                    "mLib": $("#modelLib").val(),
+                    "conModel": $("#conceptsModel").val(),
+                    "ctgModel": $("#categoriesModel").val()
+                };
+
+                if(dt["host"] != '' && dt["text"] != '' && dt["user"] != '' && dt["pwd"] != '' && dt["mLib"] != '' && dt["conModel"] != '' && dt["ctgModel"] != '') {
+                    
+                    $("#loading").show();
+                    $(".bkg_on_load").show();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/process',
+                        data: JSON.stringify(dt, null, '\t'),
+                        contentType: 'application/json;charset=UTF-8',
+                        success: function(data) {
+                            $("#loading").hide();
+                            $(".bkg_on_load").hide();
+                            document.getElementById("results").innerHTML = data;
+                        }
+                    });
+                } else {
+                    swal("Missing Information", "Please verify that you filled out all the necessary fields on the settings page.");
+                }
+                
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="bkg_on_load">
+        <iframe src="https://giphy.com/embed/cnzP4cmBsiOrccg20V" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/loading-slow-wanderson-cnzP4cmBsiOrccg20V"></a></p>
+    </div>
+    <div class="container padding-top">
+        <div class="text-center">
+            <h2>Visual Text Analytics - Scoring App</h2>
+            <h4>This app will run the Sentiment, Concepts and Category models you specify.</h4>
+            <hr>
+        </div>
+
+        <div class="information">            
+            <p>
+                <a class="btn btn-secondary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Settings</a>
+            </p>
+            <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="card card-body">
+                        <div class="form-group">
+                            <label for="host">SAS Viya Host</label>
+                            <input id="host" type="text" class="form-control" value="http://magnus.unx.sas.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input id="username" type="text" class="form-control" value="user" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" class="form-control" value="pwd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelLib">Model Library</label>
+                            <input id="modelLib" type="text" class="form-control" value="Analytics_Project_1af90995-5f8a-4847-b02f-b6a00f89497e" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoriesModel">Categories Model Astore</label>
+                            <input id="categoriesModel" type="text" class="form-control" value="2c996184744443b601749ca0764b2505_CATEGORY_BINARY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="conceptsModel">Concepts Model Astore</label>
+                            <input id="conceptsModel" type="text" class="form-control" value="2c9961847444442001749ca069a70044_CONCEPT_BINARY" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Inputs:</h2>
+        <form id="job-form">
+            <div class="form-group">
+                <label for="text">Text</label>
+                <input id="text" type="text" class="form-control" value="Yesterday I had a tuna sandwich and I loved it" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnSend">Run Models</button>
+        </form>
+    </div>
+    <div class="container">
+        <hr>
+        <h2>Results:</h2>
+        <div id="results"></div>
+    </div>
+</body>
+
+</html>
